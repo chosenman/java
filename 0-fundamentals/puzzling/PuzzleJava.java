@@ -12,9 +12,10 @@ public class PuzzleJava {
 
       PuzzleJava.third();
 
-      // generate 10 items array between 55 and 100
-      // ArrayList<Integer> farr = ;
+      // // generate 10 items array between 55 and 100
       System.out.println(PuzzleJava.fourth(10, 55, 100));
+
+      //Generate and return an array with 10 random numbers between 55-100 and have it be sorted (showing the smallest number in the beginning). Display all the numbers in the array. Next, display the minimum value in the array as well as the maximum value.
 
   }
 }
