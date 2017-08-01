@@ -1,8 +1,8 @@
 class Node {
-  private String value;
-  private Object next;
+  public int value;
+  public Node next;
 
-  Node(String val){
+  Node(int val){
     this.value = val;
     this.next = null;
   }
