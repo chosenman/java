@@ -1,0 +1,2 @@
+javac fileName.java
+java fileName     (it will be .class file)
