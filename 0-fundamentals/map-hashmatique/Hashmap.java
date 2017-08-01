@@ -12,8 +12,8 @@ public class Hashmap {
       trackList.put("Song D", "Text of song D");
 
       String name = trackList.get("Song A");
-      String text = trackList.get("Text of song A");
-
+      // String text = trackList.get("Text of song A");
+      System.out.println(name);
       for (String key : trackList.keySet() ){
         System.out.println(key + ": " + trackList.get(key));
       }
