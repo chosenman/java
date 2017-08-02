@@ -1,6 +1,8 @@
 
 public class Keeper {
 	public static void main(String[] arg) {
+		
+		// Zoo Keeper 1
 		Mammal testMammal = new Mammal();
 		testMammal.displayEnergy();
 		
