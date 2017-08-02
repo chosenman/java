@@ -3,8 +3,8 @@ public class Samurai extends Human {
 	private static int samuraiHealth = 200;
 	 static int count = 0;
 	Samurai(){
-		this.health = this.samuraiHealth;
-		this.count ++;
+		this.health = samuraiHealth;
+		count ++;
 	}
 	
 	void deathBlow(Human target) {
@@ -17,6 +17,6 @@ public class Samurai extends Human {
 	}
 	
 	void howMany() {
-		System.out.println(this.count);
+		System.out.println(count);
 	}
 }
