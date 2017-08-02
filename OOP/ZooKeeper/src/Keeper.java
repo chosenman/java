@@ -18,7 +18,7 @@ public class Keeper {
 //		testGorilla.climb();
 //			testGorilla.displayEnergy();
 		
-		// Zoo Keeper 1
+		// Zoo Keeper 2
 		Dragon testDragon = new Dragon();
 		testDragon.fly();
 		testDragon.fly();
