@@ -3,7 +3,7 @@ public class Mammal {
 	int energyLevel;
 	
 	public Mammal() {
-		this.energyLevel = 0;
+		this.energyLevel = 100;
 	}
 	
 	void displayEnergy() {
