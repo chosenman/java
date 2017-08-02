@@ -4,19 +4,34 @@ public class Keeper {
 		
 		// Zoo Keeper 1
 		Mammal testMammal = new Mammal();
-		testMammal.displayEnergy();
+//		testMammal.displayEnergy();
 		
 		Gorilla testGorilla = new Gorilla();
-		testGorilla.displayEnergy();
 		
-		testGorilla.Gthrow();
-		testGorilla.Gthrow();
-		testGorilla.Gthrow();
-			testGorilla.displayEnergy();
-		testGorilla.eatBananas();
-		testGorilla.eatBananas();
-			testGorilla.displayEnergy();
-		testGorilla.climb();
-			testGorilla.displayEnergy();
+//		testGorilla.Gthrow();
+//		testGorilla.Gthrow();
+//		testGorilla.Gthrow();
+//			testGorilla.displayEnergy();
+//		testGorilla.eatBananas();
+//		testGorilla.eatBananas();
+//			testGorilla.displayEnergy();
+//		testGorilla.climb();
+//			testGorilla.displayEnergy();
+		
+		// Zoo Keeper 1
+		Dragon testDragon = new Dragon();
+		testDragon.fly();
+		testDragon.fly();
+		testDragon.displayEnergy();
+		
+		testDragon.eatHumans();
+		testDragon.eatHumans();
+		testDragon.displayEnergy();
+		
+		testDragon.attackTown();
+		testDragon.attackTown();
+		testDragon.attackTown();
+		testDragon.displayEnergy();
+		
 	}
 }
