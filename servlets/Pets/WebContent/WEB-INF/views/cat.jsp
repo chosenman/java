@@ -11,7 +11,7 @@
 <body>
 
     <h1>
-        You ${breedCat} cat, ${nameCat}, looked at you with some affection
+        You ${myCat.breed} cat, ${myCat.name}, looked at you with some affection
         
     </h1>
 

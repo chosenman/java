@@ -11,13 +11,13 @@
         
     </head>
 <body>
-
+	
 
     <h1>
-        You created a ${breedDog}
+        You created a ${myDog.breed}
         
     </h1>
-    <h2>${nameDog} hopped into your lap and caddled you</h2>
+    <h2>${myDog.showAffection()}</h2>
 
 
 </body>

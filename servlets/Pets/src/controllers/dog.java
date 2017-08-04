@@ -1,4 +1,4 @@
-package com.codingdojo.web;
+package controllers;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.*;
 /**
  * Servlet implementation class dog
  */
@@ -36,10 +37,15 @@ public class dog extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
-		String breedDog = request.getParameter("breed");
-		String nameDog = request.getParameter("name");
-		request.setAttribute("breedDog", breedDog);
-		request.setAttribute("nameDog", nameDog);
+//		String breedDog = request.getParameter("breed");
+//		String nameDog = request.getParameter("name");
+//		request.setAttribute("breedDog", breedDog);
+		
+		Dog myDog = new Dog( request.getParameter("name"), request.getParameter("breed"), request.getParameter("weight") );
+		
+		request.setAttribute("myDog", myDog);
+		
+		
 		
 		request.getRequestDispatcher("/WEB-INF/views/dog.jsp").forward(request, response);
 		
