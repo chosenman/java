@@ -15,6 +15,7 @@ import models.*;
 public class dog extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	Dog myDog;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -28,7 +29,10 @@ public class dog extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setAttribute("myDog", myDog);
+
+		request.getRequestDispatcher("/WEB-INF/views/dog.jsp").forward(request, response);
 	}
 
 	/**
@@ -36,18 +40,11 @@ public class dog extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
-//		String breedDog = request.getParameter("breed");
-//		String nameDog = request.getParameter("name");
-//		request.setAttribute("breedDog", breedDog);
 		
-		Dog myDog = new Dog( request.getParameter("name"), request.getParameter("breed"), request.getParameter("weight") );
+		this.myDog = new Dog( request.getParameter("name"), request.getParameter("breed"), request.getParameter("weight") );
+		response.sendRedirect("/Pets/dog");
 		
-		request.setAttribute("myDog", myDog);
-		
-		
-		
-		request.getRequestDispatcher("/WEB-INF/views/dog.jsp").forward(request, response);
+
 		
 	}
 

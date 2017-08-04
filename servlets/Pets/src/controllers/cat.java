@@ -16,7 +16,8 @@ import models.*;
 @WebServlet("/cat")
 public class cat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+      
+	Cat myCat;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,7 +31,11 @@ public class cat extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		request.setAttribute("myCat", myCat);
+		
+		request.getRequestDispatcher("/WEB-INF/views/cat.jsp").forward(request, response);
 	}
 
 	/**
@@ -38,18 +43,12 @@ public class cat extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		String breedCat = request.getParameter("breed");
-//		String nameCat = request.getParameter("name");
-//		String weightCat = request.getParameter("weight");
 		
-		Cat myCat = new Cat( request.getParameter("name"), request.getParameter("breed"), request.getParameter("weight") );
+		this.myCat = new Cat( request.getParameter("name"), request.getParameter("breed"), request.getParameter("weight") );
 		
-		request.setAttribute("myCat", myCat);
-//		request.setAttribute("nameCat", nameCat);
+		response.sendRedirect("/Pets/cat");
+		
 
-		
-		
-		request.getRequestDispatcher("/WEB-INF/views/cat.jsp").forward(request, response);
 //		 RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/cat.jsp").forward(request, response);
 //		 view.forward(request, response);
 		
