@@ -36,20 +36,17 @@ public class cat extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String breedCat = request.getParameter("breed");
 		String nameCat = request.getParameter("name");
-		
-		String test = "bla bla";
-		
-
-		request.setAttribute("test", test);
+		request.setAttribute("breedCat", breedCat);
 		request.setAttribute("nameCat", nameCat);
+
 		
 		
 		request.getRequestDispatcher("/WEB-INF/views/cat.jsp").forward(request, response);
-//		 RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/cat.jsp");
+//		 RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/cat.jsp").forward(request, response);
 //		 view.forward(request, response);
 		
-//		doGet(request, response);
 	}
 
 }

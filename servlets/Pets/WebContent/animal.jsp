@@ -12,7 +12,16 @@
     </head>
 <body>
 
-    <form method="POST" action="/Pets/cat">
+    <form method="POST" action="/Pets/cat" style="width:43%; padding:1%;border: 1px solid grey; display:inline-block">
+    <h2>Cat form:</h2>
+    		Name: <input type="text" name="name"><br/>
+    		Breed: <input type="text" name="breed"><br/>
+    		Weight: <input type="text" name="weight"><br/>
+    		<button type="submit">Submit</button>
+    </form>
+    
+    <form method="POST" action="/Pets/dog" style="width:43%; padding:1%;border: 1px solid grey; display:inline-block">
+    <h2>Dog form:</h2>
     		Name: <input type="text" name="name"><br/>
     		Breed: <input type="text" name="breed"><br/>
     		Weight: <input type="text" name="weight"><br/>

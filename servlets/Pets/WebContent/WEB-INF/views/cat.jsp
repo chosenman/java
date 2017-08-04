@@ -9,13 +9,11 @@
     <link href="/Pets/style.css" media="all" rel="stylesheet" />
 </head>
 <body>
-cat response
-    <p>
-        ${nameCat}
+
+    <h1>
+        You ${breedCat} cat, ${nameCat}, looked at you with some affection
         
-    </p>
-    <p>
-    		<c:out value="${test}"></c:out>
-    	</p>
+    </h1>
+
 </body>
 </html>

@@ -6,17 +6,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Demo JSP</title>
+        <title>Dog response</title>
         <link href="/Pets/style.css" media="all" rel="stylesheet" />
         
     </head>
 <body>
 
-    <!-- getting the value for the name parameter -->
-    
+
+    <h1>
+        You created a ${breedDog}
+        
+    </h1>
+    <h2>${nameDog} hopped into your lap and caddled you</h2>
 
 
-    <!-- here we have to import the Date class. You will put the import in the first line of the jsp tag. Use the import attribute -->
-    <p>The time is: <%= new Date() %></p>
 </body>
 </html>
