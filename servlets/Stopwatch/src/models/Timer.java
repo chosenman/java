@@ -30,7 +30,23 @@ public class Timer {
 	public String getStopTime() {
 		return this.stopTime;
 	}
-	
+	// getTotal time stopwatch was run
+	public String totalTime() {
+		String output = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss a");
+		if(this.startTime != null && this.stopTime !=null) {
+			Date starTimeDateFormat = dateFromString(this.startTime);
+			Date stopTimeDateFormat = dateFromString(this.stopTime);
+			
+			long diff = stopTimeDateFormat.getTime() - starTimeDateFormat.getTime();
+			long diffSeconds = diff / 1000 % 60;  
+			long diffMinutes = diff / (60 * 1000) % 60; 
+			long diffHours = diff / (60 * 60 * 1000);  
+			
+			output = Long.toString(diffHours) + "h " + Long.toString(diffMinutes) + "m " + Long.toString(diffSeconds) + "s";
+		}
+		return output;
+	}
 	// generate time NOW in String
 	public String generateTimeNow() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss a");
