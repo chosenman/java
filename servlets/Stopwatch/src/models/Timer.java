@@ -3,6 +3,7 @@ package models;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,6 +11,8 @@ public class Timer {
 //	Date 
 	String startTime;
 	String stopTime;
+	
+	ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
 	
 	public Timer() {
 		
@@ -26,10 +29,24 @@ public class Timer {
 	// stop time
 	public void setStopTime() {
 		this.stopTime = generateTimeNow();
+		
+		ArrayList<String> newLine = new ArrayList<String>();
+		if(this.startTime != null) {
+			newLine.add(this.startTime);
+			newLine.add(this.stopTime);
+			newLine.add(totalTime());
+			
+			results.add(newLine);
+		}
 	}
 	public String getStopTime() {
 		return this.stopTime;
 	}
+	//get results table
+	public ArrayList<ArrayList<String>> getResults() {
+		return results;
+	}
+	
 	// getTotal time stopwatch was run
 	public String totalTime() {
 		String output = null;
