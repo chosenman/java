@@ -9,8 +9,9 @@ import java.util.Date;
 
 public class Timer {
 //	Date 
-	String startTime;
-	String stopTime;
+	String startTime = "empty";
+	String stopTime = "empty";
+	public String whichButton = "empty";
 	
 	ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
 	
@@ -31,12 +32,14 @@ public class Timer {
 		this.stopTime = generateTimeNow();
 		
 		ArrayList<String> newLine = new ArrayList<String>();
-		if(this.startTime != null) {
+		if(this.startTime != "empty") {
 			newLine.add(this.startTime);
 			newLine.add(this.stopTime);
 			newLine.add(totalTime());
 			
 			results.add(newLine);
+			 startTime = "empty";
+			 stopTime = "empty";
 		}
 	}
 	public String getStopTime() {
@@ -51,7 +54,7 @@ public class Timer {
 	public String totalTime() {
 		String output = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss a");
-		if(this.startTime != null && this.stopTime !=null) {
+		if(this.startTime != "empty" && this.stopTime !="empty") {
 			Date starTimeDateFormat = dateFromString(this.startTime);
 			Date stopTimeDateFormat = dateFromString(this.stopTime);
 			
@@ -86,5 +89,13 @@ public class Timer {
 		return dateFromString;
 	}
 
-	
+	public void cleanWhichButton() {
+		this.whichButton = "empty";
+	}
+	public String getWhychButton() {
+		return this.whichButton;
+	}
+	public void setWhychButton(String newVal) {
+		this.whichButton = newVal;
+	}
 }

@@ -11,19 +11,42 @@
 </head>
 <body>
 
+Which form was pushed before: ${newTimer.getWhychButton()}
+<c:if test="${newTimer.getWhychButton() == 'start' && startTime == 'empty'}">
+   ${newTimer.setStartTime()}
+   ${newTimer.cleanWhichButton()}
+</c:if>
+<c:if test="${newTimer.getWhychButton() == 'stop' && startTime != 'empty'}">
+   ${newTimer.setStopTime()}
+   ${newTimer.cleanWhichButton()}
+</c:if>
+<c:if test="${newTimer.getWhychButton() == 'reset' && startTime != 'empty'}">
+   ${newTimer.setStopTime()}
+   ${newTimer.setStartTime()}
+   ${newTimer.cleanWhichButton()}
+</c:if>
+
+<br/>
+Which form was pushed after: ${newTimer.getWhychButton()}
     <div >
     		<table style="width:100%;"><tr><td>
-	        <form method="POST" action="/RandomWord/Random"><button type="submit">Start</button>
+	        <form method="POST" action="/Stopwatch/Stopwatch">
+	        <input type="hidden" name="action" value="start">
+	        <button type="submit">Start</button>
 	        </form>
     		</td><td style="text-align:center;">
-	        <form method="POST" action="/RandomWord/Random"> <button type="submit">Stop</button>
+	        <form method="POST" action="/Stopwatch/Stopwatch"> 
+	        <input type="hidden" name="action" value="stop">
+	        <button type="submit">Stop</button>
 	        </form>
     		</td><td style="text-align:right">
-	        <form method="POST" action="/RandomdomWord/Random"> <button type="submit">Reset</button>
+	        <form method="POST" action="/Stopwatch/Stopwatch"> 
+	        <input type="hidden" name="action" value="reset">
+	        <button type="submit">Reset</button>
 	        </form>
     		</td></tr></table>
  		
- 		<table class="tbl"><tr><td> </td><td>Current time ${currentTime} </td><td> </td></tr></table>
+ 		<table class="tbl"><tr><td>Start: ${newTimer.getstartTime()}</td><td>Current time ${newTimer.generateTimeNow()} </td><td> Running time: ${newTimer.totalTime()} </td></tr></table>
  		
         <table style="width:100%">
 			<tr style="background:#ccc;">
@@ -35,11 +58,21 @@
 					Total
 				</td>
 			</tr>
+			<c:forEach var="row" items="${newTimer.results}">
+			   <tr>
+			   <c:forEach var="col" items="${row}">
+			   	<td>${col}</td>
+			   	</c:forEach>
+			   </tr>
+			</c:forEach>
         			<%-- ${randomWord} --%>
 
         </table>
 
-        ${date}
+      generateTimeNow:  ${newTimer.generateTimeNow()} <br/>
+      getResults:  ${newTimer.getResults()} <br/>
+      getStopTime:  ${newTimer.getStopTime()} <br/>
+      
     </div>
     
 </body>
