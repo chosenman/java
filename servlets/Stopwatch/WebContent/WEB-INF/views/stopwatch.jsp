@@ -11,7 +11,7 @@
 </head>
 <body>
 
-Which form was pushed before: ${newTimer.getWhychButton()}
+<%-- Which form was pushed before: ${newTimer.getWhychButton()} --%>
 <c:if test="${newTimer.getWhychButton() == 'start' && startTime == 'empty'}">
    ${newTimer.setStartTime()}
    ${newTimer.cleanWhichButton()}
@@ -26,8 +26,7 @@ Which form was pushed before: ${newTimer.getWhychButton()}
    ${newTimer.cleanWhichButton()}
 </c:if>
 
-<br/>
-Which form was pushed after: ${newTimer.getWhychButton()}
+
     <div >
     		<table style="width:100%;"><tr><td>
 	        <form method="POST" action="/Stopwatch/Stopwatch">
@@ -46,7 +45,9 @@ Which form was pushed after: ${newTimer.getWhychButton()}
 	        </form>
     		</td></tr></table>
  		
- 		<table class="tbl"><tr><td>Start: ${newTimer.getstartTime()}</td><td>Current time ${newTimer.generateTimeNow()} </td><td> Running time: ${newTimer.totalTime()} </td></tr></table>
+ 		<table class="tbl"><tr><td>Start: ${newTimer.getstartTime()}</td>
+ 		<td>Current time ${newTimer.generateTimeNow()} </td>
+ 		<td> Running time: ${newTimer.justShowTotalTime()} </td></tr></table>
  		
         <table style="width:100%">
 			<tr style="background:#ccc;">
@@ -69,9 +70,9 @@ Which form was pushed after: ${newTimer.getWhychButton()}
 
         </table>
 
-      generateTimeNow:  ${newTimer.generateTimeNow()} <br/>
+<%--       generateTimeNow:  ${newTimer.generateTimeNow()} <br/>
       getResults:  ${newTimer.getResults()} <br/>
-      getStopTime:  ${newTimer.getStopTime()} <br/>
+      getStopTime:  ${newTimer.getStopTime()} <br/> --%>
       
     </div>
     

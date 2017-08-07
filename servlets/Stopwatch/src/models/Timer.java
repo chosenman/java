@@ -67,6 +67,24 @@ public class Timer {
 		}
 		return output;
 	}
+	// just show TOTAL TIME
+	public String justShowTotalTime() {
+		String output = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss a");
+		
+		if(this.startTime != "empty") {
+			Date starTimeDateFormat = dateFromString(this.startTime);
+			Date stopTimeDateFormat = dateFromString(this.generateTimeNow());
+			
+			long diff = stopTimeDateFormat.getTime() - starTimeDateFormat.getTime();
+			long diffSeconds = diff / 1000 % 60;  
+			long diffMinutes = diff / (60 * 1000) % 60; 
+			long diffHours = diff / (60 * 60 * 1000);  
+			
+			output = Long.toString(diffHours) + "h " + Long.toString(diffMinutes) + "m " + Long.toString(diffSeconds) + "s";
+		}
+		return output;
+	}
 	// generate time NOW in String
 	public String generateTimeNow() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss a");
