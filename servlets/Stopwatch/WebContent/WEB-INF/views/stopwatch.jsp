@@ -14,18 +14,15 @@
 <%-- Which form was pushed before: ${newTimer.getWhychButton()} --%>
 <c:if test="${newTimer.getWhychButton() == 'start' && startTime == 'empty'}">
    ${newTimer.setStartTime()}
-   ${newTimer.cleanWhichButton()}
 </c:if>
 <c:if test="${newTimer.getWhychButton() == 'stop' && startTime != 'empty'}">
    ${newTimer.setStopTime()}
-   ${newTimer.cleanWhichButton()}
 </c:if>
 <c:if test="${newTimer.getWhychButton() == 'reset' && startTime != 'empty'}">
    ${newTimer.setStopTime()}
    ${newTimer.setStartTime()}
-   ${newTimer.cleanWhichButton()}
 </c:if>
-
+   ${newTimer.cleanWhichButton()}
 
     <div >
     		<table style="width:100%;"><tr><td>
