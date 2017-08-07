@@ -11,8 +11,8 @@
 </head>
 <body>
 
-<%-- Which form was pushed before: ${newTimer.getWhychButton()} --%>
-<c:if test="${newTimer.getWhychButton() == 'start' && startTime == 'empty'}">
+Which form was pushed before: ${newTimer.getWhychButton()}
+<%-- <c:if test="${newTimer.getWhychButton() == 'start' && startTime == 'empty'}">
    ${newTimer.setStartTime()}
 </c:if>
 <c:if test="${newTimer.getWhychButton() == 'stop' && startTime != 'empty'}">
@@ -22,7 +22,7 @@
    ${newTimer.setStopTime()}
    ${newTimer.setStartTime()}
 </c:if>
-   ${newTimer.cleanWhichButton()}
+   ${newTimer.cleanWhichButton()} --%>
 
     <div >
     		<table style="width:100%;"><tr><td>
@@ -67,9 +67,9 @@
 
         </table>
 
-<%--       generateTimeNow:  ${newTimer.generateTimeNow()} <br/>
+      generateTimeNow:  ${newTimer.generateTimeNow()} <br/>
       getResults:  ${newTimer.getResults()} <br/>
-      getStopTime:  ${newTimer.getStopTime()} <br/> --%>
+      getStopTime:  ${newTimer.getStopTime()} <br/> 
       
     </div>
     

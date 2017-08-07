@@ -26,6 +26,7 @@ public class Stopwatch extends HttpServlet {
 	String whichButton = null;
 	String startTime = null;
 	
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -64,16 +65,18 @@ public class Stopwatch extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		sessionTimer = (Timer) session.getAttribute("newTimer");
-			
-//			if(newTimer.getWhychButton() == "start" && startTime == "empty") {
-//					newTimer.setStartTime();
-//			} else if (newTimer.getWhychButton() == "stop" && startTime != "empty") {
-//					newTimer.setStopTime();
-//			} else if (newTimer.getWhychButton() == "reset" && startTime != "empty") {
-//					newTimer.setStopTime();
-//					newTimer.setStartTime();
-//			} 
-//		newTimer.cleanWhichButton();
+		
+					
+		if(newTimer.getWhychButton().equals("start") && startTime.equals("empty")) {
+				System.out.println("here");
+				newTimer.setStartTime();
+		} else if (newTimer.getWhychButton().equals("stop") && !startTime.equals("empty")) {
+				newTimer.setStopTime();
+		} else if (newTimer.getWhychButton().equals("reset") && !startTime.equals("empty")) {
+				newTimer.setStopTime();
+				newTimer.setStartTime();
+		} 
+		newTimer.cleanWhichButton();
 		
 		response.sendRedirect("/Stopwatch/Stopwatch");
 
