@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 public class HomeController {
-	
-    
+	 
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
     			Integer counter = (Integer) session.getAttribute("counter");
@@ -20,10 +19,7 @@ public class HomeController {
     			} else {
     	            counter++;			
     			}
-    			
-
             session.setAttribute("counter", counter);
-            
             return "index.jsp";
     }
     @RequestMapping("/counter")
