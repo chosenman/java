@@ -16,7 +16,7 @@ public class HomeController {
 	
 	
     @RequestMapping(path="/")
-    public String index(Model model, @RequestParam(value="name", defaultValue="User") String nameField) {
+    public String index(Model model, @RequestParam(value="name", required=false, defaultValue="User") String nameField) {
     			String output = "Hello " + nameField;
             model.addAttribute("output", output);
             return "index.jsp";
