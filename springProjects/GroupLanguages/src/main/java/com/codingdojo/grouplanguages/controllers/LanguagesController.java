@@ -28,24 +28,16 @@ public class LanguagesController {
     // NEW LANGUAGE POST
     @PostMapping("/languages/new")
     public String createBook(
-    		@RequestParam(value="name", defaultValue="empty") String name,
-    		@RequestParam(value="creator", defaultValue="empty") String creator,
-    		@RequestParam(value="cver", defaultValue="empty") String cver,
     		Model model,
-	    		// from lesson
 	    		@Valid @ModelAttribute("lang") Language lang,
 	    		BindingResult result
     		) {
-		// from lesson
 		if (result.hasErrors()) {
 			List<Language> languages = languageService.allLangs();
             model.addAttribute("languages", languages);
             return "index.jsp";
 		}else{
-	    		Language newOne = new Language(name, creator, cver );
-	    		if(true) {
-	    			languageService.setNewLang(newOne);
-	    		}
+	    		languageService.setNewLang(lang);
 	    		model.addAttribute("error", "error message");
 	    		return "redirect:/languages";
 	     }
@@ -57,7 +49,6 @@ public class LanguagesController {
     @RequestMapping("/languages")
     public String index(
     		Model model,
-    		// from lesson
     		@Valid @ModelAttribute("lang") Language lang,
     		BindingResult result
     		) {
@@ -122,14 +113,6 @@ public class LanguagesController {
 	            return "redirect:/languages";
 	         }
     	
-    		// manual update
-//    		Language lang = languageService.findLangByIndex(index);
-//    		lang.setName(name);
-//    		lang.setCreator(creator);
-//    		lang.setCver(cver);
-//
-//    		model.addAttribute("error", "error message");
-//    		return "redirect:/languages";
     }  
 
 }
