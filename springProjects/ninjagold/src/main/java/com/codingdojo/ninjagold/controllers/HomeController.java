@@ -23,6 +23,7 @@ public class HomeController {
     	if(score == null) { score = 0; }
     	
     	model.addAttribute("score", score);
+    	model.addAttribute("log", log);
     return "index.jsp";
     }
     
@@ -30,18 +31,27 @@ public class HomeController {
     public String resultsPost( 
     		@RequestParam(value="activity", defaultValue="empty") String activity
     		) {
+    		int resultOfgame;
     		// if pushed farm
     		if(activity.equals("farm")) {
-    			this.score += randomWithRange(10, 20);
+    			resultOfgame = randomWithRange(10, 20);
+    			log.add(message(resultOfgame,activity));
+    			this.score += resultOfgame;
     		// if pushed cave
     		} else if(activity.equals("cave")) {
-    			this.score += randomWithRange(5, 10);
+    			resultOfgame = randomWithRange(5, 10);
+    			log.add(message(resultOfgame,activity));
+    			this.score += resultOfgame;
         	// if pushed house
     		} else if(activity.equals("house")) {
-    			this.score += randomWithRange(2, 5);
+    			resultOfgame = randomWithRange(2, 5);
+    			log.add(message(resultOfgame,activity));
+    			this.score += resultOfgame;
         	// if pushed casino
     		}else if(activity.equals("casino")) {
-    			this.score += randomWithRange(-50, 50);
+    			resultOfgame = randomWithRange(-50, 50);
+    			log.add(message(resultOfgame,activity));
+    			this.score += resultOfgame;
     		// if pushed reset
 	    }else if(activity.equals("reset")) {
 	    		this.score=0;
@@ -59,10 +69,10 @@ public class HomeController {
     		
     		if(result>0) {
     			// positive message
-    			output += "You entered a " + place + " and earned " + result + " gold   (" + dateAsString + ")";
+    			output = "You entered a " + place + " and earned " + result + " gold   (" + dateAsString + ")";
     		} else {
     			// negative message
-    			output += "You entered a " + place + " and lost " + result + " gold  Ouch.. (" + dateAsString + ")";
+    			output = "You entered a " + place + " and lost " + result + " gold  Ouch.. (" + dateAsString + ")";
     		}
     		
     		return output;

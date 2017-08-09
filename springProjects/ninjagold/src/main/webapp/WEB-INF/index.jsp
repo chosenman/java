@@ -56,7 +56,14 @@
       
       <h2>Activities</h2>
       <div class="activities">
-
+			<c:forEach var="row" items="${log}">
+				<c:if test="${row.contains('lost')}">
+				   <p style="color:red">${row}<p>
+				</c:if>
+				<c:if test="${!row.contains('lost')}">
+				   <p style="color:green">${row}<p>
+				</c:if>
+			</c:forEach>
       </div>
 
  
