@@ -55,6 +55,7 @@ public class HomeController {
     		// if pushed reset
 	    }else if(activity.equals("reset")) {
 	    		this.score=0;
+	    		this.log = new ArrayList<String>();
 	    }
     			System.out.println(activity);
 
