@@ -37,7 +37,7 @@ public class HomeController {
     }
     
     @RequestMapping(path="/results")
-    public String index(Model model) {
+    public String resultGet(Model model) {
 
             model.addAttribute("name", name);
             model.addAttribute("location", location);
