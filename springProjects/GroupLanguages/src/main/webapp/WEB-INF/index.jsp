@@ -18,8 +18,8 @@
     <td>${lang.creator}</td>
     <td>${lang.cver}</td>
     <td>
-    		<a href="/languages/delete/${loop.index}">delete</a>
-    		<a href="/languages/update/${loop.index}">edit</a>
+    		<a href="/languages/delete/${lang.getId()}">delete</a>
+    		<a href="/languages/update/${lang.getId()}">edit</a>
     </td>
     </tr>
 </c:forEach>
