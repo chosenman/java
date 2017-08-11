@@ -4,41 +4,56 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import com.codingdojo.grouplanguages.models.*;
+import com.codingdojo.grouplanguages.repositories.LanguageRepository;
 
 @Service
 public class LanguageService {
+	
+	// WORKING WITH REPOSITORY
+	private LanguageRepository languageRepository;
+	
+    public LanguageService(LanguageRepository languageRepository){
+        this.languageRepository = languageRepository;
+    }
+    
+//    @Autowired
+//    private CrudRepository<Language, Long> languageRepository;
+
 
     // initialize the books variable with values
-    private List<Language> languages = new ArrayList<Language>(Arrays.asList(
-            new Language("Java", "James Gosling", "1.8")
-            ));
+//    private List<Language> languages = new ArrayList<Language>(Arrays.asList(
+//            new Language("Java", "James Gosling", "1.8")
+//            ));
     
     // returns all the books
     public List<Language> allLangs() {
-        return languages;
+//        return languages;
+    		  return (List<Language>) languageRepository.findAll();
     }
     
-    public Language findLangByIndex(int index) {
-        if (index < languages.size()){
-            return languages.get(index);
-        }else{
-            return null;
-        }
+    public void addLanguage(Language language){
+    		languageRepository.save(language);
     }
     
-    public void deleteRecord(int index) {
-    		languages.remove(index);
+    public Language findLangByIndex(Long id) {
+            return languageRepository.findOne(id);
+    }
+    
+    public void deleteRecord(Long id) {
+    			languageRepository.delete(id);
     }
     public void setNewLang(Language newLang) {
-    	languages.add(newLang);
+    		languageRepository.save(newLang);
     }
 	
     // from lesson
-    public void updateLang(int id, Language lang) {
-        if (id < languages.size()){
-            languages.set(id, lang);
+    public void updateLang(Long id, Language lang) {
+        if (languageRepository.exists(id)){
+            languageRepository.save(lang);
         }
     }
 	

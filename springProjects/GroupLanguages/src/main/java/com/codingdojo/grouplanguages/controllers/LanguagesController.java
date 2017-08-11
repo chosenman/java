@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,9 @@ import com.codingdojo.grouplanguages.models.*;
 import com.codingdojo.grouplanguages.services.LanguageService;
 
 @Controller
+//@EntityScan(basePackageClasses=Language.class)
 public class LanguagesController {
+	
 	private final LanguageService languageService;
 	
     public LanguagesController(LanguageService languageService){
@@ -58,9 +61,9 @@ public class LanguagesController {
     }
     
     // One language
-    @RequestMapping("/languages/{index}")
-    public String findLanguage(Model model, @PathVariable("index") int index) {
-    			Language lang = languageService.findLangByIndex(index);
+    @RequestMapping("/languages/{id}")
+    public String findLanguage(Model model, @PathVariable("id") Long id) {
+    			Language lang = languageService.findLangByIndex(id);
     			if (lang != null) {
 	            model.addAttribute("lang", lang);
 	            return "showLanguage.jsp";
@@ -71,16 +74,16 @@ public class LanguagesController {
     
     // //////
     // DELETE
-    @RequestMapping("/languages/delete/{index}")
-    public String deleteLanguage(Model model, @PathVariable("index") int index) {
-    			languageService.deleteRecord(index);
+    @RequestMapping("/languages/delete/{id}")
+    public String deleteLanguage(Model model, @PathVariable("id") Long id) {
+    			languageService.deleteRecord(id);
     			return "redirect:/languages";
     }
     
     // //////
     // UPDATE GET
     @RequestMapping("/languages/update/{index}")
-    public String updateLanguage(Model model, @PathVariable("index") int index) {
+    public String updateLanguage(Model model, @PathVariable("index") Long index) {
     			Language lang = languageService.findLangByIndex(index);
     			if (lang != null) {
     	            model.addAttribute("lang", lang);
@@ -93,10 +96,7 @@ public class LanguagesController {
     // UPDATE POST
     @PostMapping("/languages/update/{index}")
     public String updateLanguagePOST(
-    		@PathVariable("index") int index,
-    		@RequestParam(value="name", defaultValue="empty") String name,
-    		@RequestParam(value="creator", defaultValue="empty") String creator,
-    		@RequestParam(value="cver", defaultValue="empty") String cver,
+    			@PathVariable("index") Long index,
     		
 	    		// from lesson
 	    		@Valid @ModelAttribute("lang") Language lang,

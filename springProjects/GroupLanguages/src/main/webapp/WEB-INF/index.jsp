@@ -27,6 +27,8 @@
 <!-- ... -->
 <h2>Add new record</h2>
  <form:form method="POST" action="/languages/new" modelAttribute="lang">
+ 	<form:hidden path="id"/>
+ 	
     <form:label path="name">name
     <form:input path="name"/></form:label>
     <span style="color:red"><form:errors path="name"/></span>
