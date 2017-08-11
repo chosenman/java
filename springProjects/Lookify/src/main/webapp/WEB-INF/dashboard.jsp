@@ -15,6 +15,9 @@
 	<c:if test="${name != null }">
 		<h2>Songs by artist "${name}"</h2>
 	</c:if>
+	<c:if test="${topTenShow}">
+		<h2>Top 10 songs:</h2>
+	</c:if>
 		<table style="width:100%; line-height:140%;">
 			<tr style="background:#999"><td>id</td><td>Name	</td><td>rating</td><td>actions</td></tr>
 			<c:forEach var="song" items="${songs}" varStatus="loop" >
