@@ -1,2 +1,13 @@
 javac fileName.java
 java fileName     (it will be .class file)
+
+
+
+MAMP help - glitch
+
+  484  cd /Applications/MAMP
+  485  cd db/mysql56/
+  486  ls
+  487  rm ib_logfile0
+  488  rm ib_logfile1
+  489  history
