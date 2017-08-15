@@ -11,3 +11,28 @@ MAMP help - glitch
   487  rm ib_logfile0
   488  rm ib_logfile1
   489  history
+
+
+
+  // 
+  1. to add category, I need to get that product from db
+  	Product product = productRepository.findOne(id)
+
+  2. get that category from db using  category id
+  	Category category = categoryRepository.findOneCategory(id);
+
+  3. add category into categories in product LOCALLY(it happens in service but not saved in db yet)
+  	product.categories.add(category)
+  	// product.categories is type List<Category> and List has method add, List.add(obj)
+  	product.categories.add( categorytRepository.findOne(category_id) )
+
+  4. save this change
+  	productRepository.save(product)
+
+
+  combine the code i get
+  		Product product = productRepository.findOne(product_id);
+		product.getCategories().add(categorytRepository.findOne(category_id));
+		productRepository.save(product);
+
+  	
