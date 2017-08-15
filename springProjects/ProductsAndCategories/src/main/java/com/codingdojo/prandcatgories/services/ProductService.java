@@ -31,9 +31,14 @@ public class ProductService {
 		productRepository.save(product);
 	}
 	
+	// works in both direction:
+	// for adding new category in the product
+	// for adding in category new products
 	public void addCategory(Long category_id, Long product_id) {
 		Product product = productRepository.findOne(product_id);
-		product.getCategories().add(categorytRepository.findOne(category_id));
+		Category category = categorytRepository.findOne(category_id);
+		
+		product.getCategories().add(category); 	// adding into Product.categoriesList new Category
 		productRepository.save(product);
 	}
 	

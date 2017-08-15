@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.prandcatgories.models.Category;
 import com.codingdojo.prandcatgories.models.Product;
@@ -47,12 +47,25 @@ public class CategoryController {
     @RequestMapping("/categories/{id}")
     public String findCategory(Model model, @PathVariable("id") Long id) {
     			Category category = categoryService.findCategoryByIndex(id);
+    			List<Product> products = productService.findAllProducts();
     			if (category != null) {
+	            model.addAttribute("products", products);
 	            model.addAttribute("category", category);
 	            return "category.jsp";
     			} else {
     				return "redirect:/";
     			}
+    }
+    
+    @PostMapping("/categories/newCategory")
+    public String addNewCategory(
+    		@RequestParam(value="category_id") Long category_id,
+    		@RequestParam(value="product_id") Long product_id
+    		) {
+    		System.out.println(category_id);
+    		System.out.println(product_id);
+    		productService.addCategory(category_id, product_id);
+    		return "redirect:/categories/"+category_id;
     }
 
     
