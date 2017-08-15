@@ -8,3 +8,16 @@
 	<li><a href="/ninjas/new">Add new Ninja</a></li>
 	
 </ul>
+
+<table style="width:100%">
+	<tr>
+		<tr>Name:</td>
+	</tr>
+	<c:forEach var="dojo" items="${dojos}">
+		<tr><td>
+		<a href="/dojos/${dojo.id}">
+			${dojo.name}
+		</a>
+		</td></tr>
+	</c:forEach>
+</table>

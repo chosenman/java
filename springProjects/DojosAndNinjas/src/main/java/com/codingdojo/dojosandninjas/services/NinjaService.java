@@ -27,4 +27,8 @@ public class NinjaService {
 	public List<Dojo> findAllDojos(){
 		return (List<Dojo>) dojoRepository.findAll();
 	}
+	
+	public List<Ninja> findAllNinjas(){
+		return (List<Ninja>) ninjaRepository.findAll();
+	}
 }
