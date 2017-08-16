@@ -14,7 +14,11 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -25,6 +29,8 @@ public class User {
     @GeneratedValue
     private Long id;
     
+    @NotNull
+    @Email
     @Size(min=3, message="User email must be greater than 3 characters")
     private String email;
     @Size(min=3, message="User lastname must be greater than 3 characters")
