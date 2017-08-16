@@ -38,7 +38,7 @@
     
     <h1>Register!</h1>
     
-	<p><form:errors path="user.*"/></p> 
+	<p><form:errors path="userReg.*"/></p> 
     
     <form:form method="POST" action="/registration" modelAttribute="userReg">
     

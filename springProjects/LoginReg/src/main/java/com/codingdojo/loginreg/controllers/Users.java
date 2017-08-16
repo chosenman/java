@@ -33,32 +33,22 @@ public class Users {
     }
 	//
     
+    // LOGIN REG TOGETHER
     @RequestMapping("/")
     public String home(
     		Model model,
-    		
     		// LOGIN PART
     		@RequestParam(value="error", required=false) String error, @RequestParam(value="logout", required=false) String logout,
-    		
     		// registerPart
-    		@Valid @ModelAttribute("userReg") User userReg, 
-    		BindingResult result,
-    		HttpSession session, 
+    		@Valid @ModelAttribute("userReg") User userReg, BindingResult result, HttpSession session, 
     		
     		Principal principal
     		) {
-    		
-        
-//        System.out.println(principal.getName());
-    	
-    		try { 
-    				principal.getName();
-    				return "redirect:/dashboard";
-    			} catch (Exception e) {
-					// TODO: handle exception
-				}
 
-    		
+    		try { 
+    			principal.getName();
+    			return "redirect:/dashboard";
+    		} catch (Exception e) {  }
     		
         return "loginreg.jsp";
     }
@@ -82,19 +72,18 @@ public class Users {
 	    		// Login part
 	    		@RequestParam(value="error", required=false) String error, @RequestParam(value="logout", required=false) String logout,
 	    		
-	    		@Valid @ModelAttribute("userReg") User userReg, 
-	    		BindingResult result, Model model, 
-	    		HttpSession session
+	    		@Valid @ModelAttribute("userReg") User userReg, BindingResult result, Model model, HttpSession session
 	    		) {
 		    
 	    		// NEW
 	    		userValidator.validate(userReg, result);
 	    		if (result.hasErrors()) {
+	    			System.out.println("we have error");
 		        return "loginreg.jsp";
 		    }
 	    		
 		    userService.saveWithUserRole(userReg);
-		    return "redirect:/dashboard";
+		    return "redirect:/";
 	    }
 	    
 	    // LOGIN
