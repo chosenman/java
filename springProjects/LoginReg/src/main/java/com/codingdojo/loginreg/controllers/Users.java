@@ -58,10 +58,16 @@ public class Users {
 	    @RequestMapping("/dashboard")
 	    public String dashboard(Principal principal, Model model) {
 	        // 1
-	        String username = principal.getName();
-	        model.addAttribute("currentUser", userService.findByUsername(username));
-	        model.addAttribute("lastLogin", new Date());
-	        return "dashboard.jsp";
+	    		try { 
+	    			String username = principal.getName();
+	    	        model.addAttribute("currentUser", userService.findByUsername(username));
+	    	        model.addAttribute("lastLogin", new Date());
+	    	        return "dashboard.jsp";
+	    		} catch (Exception e) {  }
+	    		
+	    		return "redirect:/";
+	        
+
 	    }
     
     
