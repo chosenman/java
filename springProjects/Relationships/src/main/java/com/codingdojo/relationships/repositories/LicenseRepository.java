@@ -10,5 +10,7 @@ import com.codingdojo.relationships.models.Person;
 public interface LicenseRepository extends CrudRepository<License, Long> {
 //	List<License> findAllWithoutPerson();
 	List<Person> findAllPersonByPersonLicenseNull();
+//	List<Person> findOneByStateNotNull();
+//	findAll, findOne, findBy Number NotNull, Null Contains("sdfsdfl")
 
 }

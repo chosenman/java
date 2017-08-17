@@ -5,21 +5,20 @@
 <ul><li><a href="/">Home</a></li></ul>
 
 		 <form:form method="POST" action="/licenses/new" modelAttribute="license">
-		 	<form:hidden path="id"/>
+<%-- 		 	<form:hidden path="id"/> --%>
 		 	
 		    <%-- hidden field value="Hello JavaInterviewPoint" --%> 
-		    <form:label path="number">
+<%-- 		    <form:label path="number">
 		    <form:hidden  path="number"  /></form:label>
-		    <span style="color:red"><form:errors path="number"/></span>
+		    <span style="color:red"><form:errors path="number"/></span> --%>
 		    <%-- HIDDEN FIELD --%>
 		 	
 		    <form:label path="person">Person: 
-		    <form:select path="person"  >
 		    
-			<%-- itemValue="firstName" --%>
-			
+		    <form:select path="person"  >
 		        <form:options items="${allpersons}" itemValue="id"  itemLabel="firstName" />
 			</form:select>
+			
 		    </form:label>
 		    <span style="color:red"><form:errors path="person"/></span>
 		    <br/>
