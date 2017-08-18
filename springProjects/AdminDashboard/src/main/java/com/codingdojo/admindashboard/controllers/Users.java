@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.admindashboard.models.User;
-import com.codingdojo.admindashboard.repositories.UserRepository;
 import com.codingdojo.admindashboard.services.UserService;
 import com.codingdojo.admindashboard.validator.UserValidator;
 
