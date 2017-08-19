@@ -45,7 +45,15 @@
     <tr style="background:#ccc"><td>Name</td><td>Date</td><td>Location</td><td>Host</td><td>Action/ Status</td></tr>
     <c:forEach var="row" items="${allEvents}">
     		<tr><td><a href="/events/${row.id}">${row.name}</a></td>
-    		<td>${row.eventDate}</td><td>${row.location}</td><td>${row.host.email}</td><td> - </td></tr>
+    		<td>${row.eventDate}</td><td>${row.location}</td><td>${row.host.email}</td>
+    		<td>
+    		 <c:if test="${row.getId() == currentUser.getId() }">
+    		 	edit  |  delete
+    		 </c:if>
+     	 <c:if test="${row.getId() != currentUser.getId() }">
+    		 	join
+    		 </c:if>
+    		 </td></tr>
     </c:forEach>
     </table>
     <!-- SHOW ALL EVENTS -->
