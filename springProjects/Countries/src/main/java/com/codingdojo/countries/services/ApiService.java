@@ -36,6 +36,24 @@ public class ApiService {
 	public List<Object[]> sedondQuery(){
 		return countryRepository.sedondQuery();
 	}
+	public List<Object[]> q3(){
+		return countryRepository.q3();
+	}
+	public List<Object[]> q4(){
+		return countryRepository.q4();
+	}
+	public List<Object[]> q5(){
+		return countryRepository.q5();
+	}
+	public List<Object[]> q6(){
+		return countryRepository.q6();
+	}
+	public List<Object[]> q7(){
+		return countryRepository.q7();
+	}
+	public List<Object[]> q8(){
+		return countryRepository.q8();
+	}
 	
 
 }

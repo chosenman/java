@@ -26,9 +26,11 @@ public class License {
 		 
 		 private Date createdAt;
 		 private Date updatedAt;
+		 
 		 @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 		 @JoinColumn(name="person_id")
 		 private Person person;
+		 
 		 public License() {
 		     
 		 }
