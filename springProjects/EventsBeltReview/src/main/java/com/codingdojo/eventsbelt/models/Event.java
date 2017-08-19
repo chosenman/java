@@ -47,7 +47,7 @@ public class Event {
 	 
 	 
 	    @OneToMany(mappedBy="which_event", fetch = FetchType.LAZY)
-	    private List<Message> message_related_to_event;
+	    private List<Comment> message_related_to_event;
     
     private Date createdAt;
     private Date updatedAt;
@@ -129,11 +129,11 @@ public class Event {
 		this.state = state;
 	}
 
-	public List<Message> getMessage_related_to_event() {
+	public List<Comment> getMessage_related_to_event() {
 		return message_related_to_event;
 	}
 
-	public void setMessage_related_to_event(List<Message> message_related_to_event) {
+	public void setMessage_related_to_event(List<Comment> message_related_to_event) {
 		this.message_related_to_event = message_related_to_event;
 	}
 	 

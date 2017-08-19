@@ -70,7 +70,7 @@ public class User {
 
     
     @OneToMany(mappedBy="author", fetch = FetchType.LAZY)
-    private List<Message> message_posted_by;
+    private List<Comment> message_posted_by;
     
     public User() {
     }
@@ -190,11 +190,11 @@ public class User {
 		this.events = events;
 	}
 
-	public List<Message> getMessage_posted_by() {
+	public List<Comment> getMessage_posted_by() {
 		return message_posted_by;
 	}
 
-	public void setMessage_posted_by(List<Message> message_posted_by) {
+	public void setMessage_posted_by(List<Comment> message_posted_by) {
 		this.message_posted_by = message_posted_by;
 	}
     

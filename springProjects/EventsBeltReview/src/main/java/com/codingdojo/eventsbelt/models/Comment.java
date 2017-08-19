@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="messages")
-public class Message {
+public class Comment {
 
     @Id
     @GeneratedValue
@@ -28,12 +28,12 @@ public class Message {
 	 private Event which_event;
 	 
 	 @Size(min=3, message="Message must be greater than 3 characters")
-	 private String message;
+	 private String message_text;
 	 
 	 private Date createdAt;
 	 private Date updatedAt;
 	 
-	 public Message() {
+	 public Comment() {
 		 this.createdAt = new Date();
 		 this.updatedAt = new Date();
 	 }
@@ -56,12 +56,13 @@ public class Message {
 		this.author = author;
 	}
 
-	public String getMessage() {
-		return message;
+
+	public String getMessage_text() {
+		return message_text;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setMessage_text(String message_text) {
+		this.message_text = message_text;
 	}
 
 	public Date getCreatedAt() {

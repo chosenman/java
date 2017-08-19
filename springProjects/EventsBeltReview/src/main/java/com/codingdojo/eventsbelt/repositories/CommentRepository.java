@@ -1,11 +1,14 @@
 package com.codingdojo.eventsbelt.repositories;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.codingdojo.eventsbelt.models.Message;
+import com.codingdojo.eventsbelt.models.Comment;
 
 @Repository
-public interface MessageRepository extends CrudRepository<Message, Long>{
+public interface CommentRepository extends CrudRepository<Comment, Long>{
+	List<Comment> findAll();
 
 }
