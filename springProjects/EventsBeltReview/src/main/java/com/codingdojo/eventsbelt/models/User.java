@@ -60,7 +60,7 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "events_users", 
-        joinColumns = @JoinColumn(name = "user_id"), 
+        joinColumns = @JoinColumn(name = "user_ev_id"), 
         inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> events;

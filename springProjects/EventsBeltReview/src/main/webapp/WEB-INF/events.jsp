@@ -47,12 +47,34 @@
     		<tr><td><a href="/events/${row.id}">${row.name}</a></td>
     		<td>${row.eventDate}</td><td>${row.location}</td><td>${row.host.email}</td>
     		<td>
-    		 <c:if test="${row.getId() == currentUser.getId() }">
-    		 	edit  |  delete
+    		
+    		 <%-- <c:if test="${row.getId() == currentUser.getId() }">
+    		 	<a href="/events/${row.getId()}/edit">edit</a>  |  
+    		 	<a href="/events/${row.getId()}/delete">delete</a>
     		 </c:if>
      	 <c:if test="${row.getId() != currentUser.getId() }">
-    		 	join
+    		 	<a href="/events/${row.getId()}/join">join</a>
     		 </c:if>
+     	 <c:if test="${row.users.contains( currentUser ) }">
+    		 	Joined
+    		 </c:if> --%>
+    		 
+		<c:choose>
+		  <c:when test="${row.getId() == currentUser.getId() }">
+    		 	<a href="/events/${row.getId()}/edit">edit</a>  |  
+    		 	<a href="/events/${row.getId()}/delete">delete</a>
+		  </c:when>
+		  <c:when test="${row.users.contains( currentUser ) }">
+		    		Joined  
+		    		<a href="/events/${row.getId()}/cancel">Cancel</a>		  
+		    </c:when>
+		  <c:otherwise>
+	     	 <c:if test="${row.getId() != currentUser.getId() }">
+	    		 	<a href="/events/${row.getId()}/join">join</a>
+	    		 </c:if>
+		  </c:otherwise>
+		</c:choose>
+    		 
     		 </td></tr>
     </c:forEach>
     </table>

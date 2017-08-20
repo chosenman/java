@@ -45,15 +45,19 @@ public class EventsController {
     		@Valid @ModelAttribute("event") Event event, BindingResult result
     		) {
 
-    			String username = principal.getName();
-    			User currentUser = userService.findByUsername(username);
-    			Boolean isAdmin = userService.ifThisUserisAdmin(currentUser.getId());
-    	        model.addAttribute("currentUser", currentUser );
-    	        model.addAttribute("isAdmin", isAdmin );
-    	        
-    	        List<Event> allEvents = eventService.findAll();
-    	        model.addAttribute("allEvents", allEvents );
-    	        return "events.jsp";
+		try { 
+			String username = principal.getName();
+			User currentUser = userService.findByUsername(username);
+			Boolean isAdmin = userService.ifThisUserisAdmin(currentUser.getId());
+	        model.addAttribute("currentUser", currentUser );
+	        model.addAttribute("isAdmin", isAdmin );
+	        
+	        List<Event> allEvents = eventService.findAll();
+	        model.addAttribute("allEvents", allEvents );
+	        return "events.jsp";
+		} catch (Exception e) {  return "redirect:/"; }
+    	
+
     }
     
     
@@ -65,20 +69,22 @@ public class EventsController {
 			BindingResult result,
 			@RequestParam(value="myDate", defaultValue="myDate") String myDate
     		) {
-    		System.out.println(myDate);
-    		event.setEventDate(dateFromString(myDate));
-    		
-   		String username = principal.getName();
-		User currentUser = userService.findByUsername(username);
-    		event.setHost(currentUser);
-    		
-    		if(result.hasErrors()) {
-    			System.out.println("we have errors doing event");
-    			return "events.jsp";
-    		} else {
-    	    		eventService.setNewEvent(event);
-        		return "redirect:/events";	
-    		}
+		try { 
+	    		System.out.println(myDate);
+	    		event.setEventDate(dateFromString(myDate));
+	    		
+	   		String username = principal.getName();
+			User currentUser = userService.findByUsername(username);
+	    		event.setHost(currentUser);
+	    		
+	    		if(result.hasErrors()) {
+	    			System.out.println("we have errors doing event");
+	    			return "events.jsp";
+	    		} else {
+	    	    		eventService.setNewEvent(event);
+	        		return "redirect:/events";	
+	    		}
+		} catch (Exception e) {  return "redirect:/"; }
 
     }
     
@@ -89,7 +95,7 @@ public class EventsController {
     		@PathVariable("event_id") Long event_id,
     		@Valid @ModelAttribute("message_model") Comment message_model, BindingResult result
     		) {
-
+		try { 
     			String username = principal.getName();
     			User currentUser = userService.findByUsername(username);
     			Event currentEvent = eventService.findById(event_id);
@@ -105,6 +111,60 @@ public class EventsController {
     	        model.addAttribute("messages", messages);
     	        
     	        return "one_event.jsp";
+		} catch (Exception e) {  return "redirect:/"; }
+    }
+    
+    // JOIN EVENT
+    @RequestMapping("/events/{event_id}/join")
+    public String join( 
+    		Model model, Principal principal,
+    		@PathVariable("event_id") Long event_id
+    		) {
+    		
+		try { 
+	    		String username = principal.getName();
+	    		User currentUser = userService.findByUsername(username);
+	    		userService.joinEvent(event_id, currentUser.getId());
+	    		
+	    		return "redirect:/events";	
+		} catch (Exception e) {  return "redirect:/"; }
+    }
+    
+    // CANCEL join EVENT
+    @RequestMapping("/events/{event_id}/cancel")
+    public String cancel( 
+    		Model model, Principal principal,
+    		@PathVariable("event_id") Long event_id
+    		) {
+    		
+		try { 
+	    		String username = principal.getName();
+	    		User currentUser = userService.findByUsername(username);
+	    		userService.cancelJoinEvent(event_id, currentUser.getId());
+	    		
+	    		return "redirect:/events";	
+		} catch (Exception e) {  return "redirect:/"; }
+    }
+    
+    // DELETE EVENT
+    @RequestMapping("/events/{event_id}/delete")
+    public String delete( 
+    		Model model, Principal principal,
+    		@PathVariable("event_id") Long event_id
+    		) {
+    		
+    		return "redirect:/events";	
+    }
+    
+    // EDIT EVENT
+    @RequestMapping("/events/{event_id}/edit")
+    public String edit( 
+    		Model model, Principal principal,
+    		@PathVariable("event_id") Long event_id
+    		) {
+    		
+    			return "redirect:/events";	
+//    		return "edit_event.jsp";	
     }
     
     // POST MASSAGE

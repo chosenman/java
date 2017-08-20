@@ -44,7 +44,10 @@
     <p> <b>Location:</b> ${currentEvent.location}, ${currentEvent.state} </p>
     <p> <b>People who are attending this event:</b> ${currentEvent.users.size()} </p>
     
-    <- here goes table with users and their location ->
+    - here goes table with users and their location -
+    <c:forEach var="user" items="${currentEvent.users}">
+    		<p>${user.email}</p>
+    </c:forEach>
     <!-- END EVENTS DETAILS -->
 
 

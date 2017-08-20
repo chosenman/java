@@ -41,7 +41,7 @@ public class Event {
 	 @JoinTable(
 	      name = "events_users",  
 	      joinColumns = @JoinColumn(name = "event_id"), 
-	      inverseJoinColumns = @JoinColumn(name = "user_id")
+	      inverseJoinColumns = @JoinColumn(name = "user_ev_id")
 	 )
 	 private List<User> users;
 	 
