@@ -76,7 +76,7 @@
         </p>
         
 
-        <input type="submit" value="Create"/>
+        <input type="submit" value="Sqve"/>
     </form:form>
 	<!-- ADD NEW EVENT  -->
 

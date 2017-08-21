@@ -36,35 +36,66 @@
 
     <h1>Welcome, <c:out value="${currentUser.email}"></c:out> (${currentUser.id})</h1>
     
-    <p>
-    Here are some of the events in your state:
-    </p>
+ 
     
-    <!-- SHOW ALL EVENTS -->
+    <!-- SHOW EVENTS IN YOUR STATE -->
+   <h2>Here are some of the events in your state: </h2>
     <table style="width:100%">
     <tr style="background:#ccc"><td>Name</td><td>Date</td><td>Location</td><td>Host</td><td>Action/ Status</td></tr>
     <c:forEach var="row" items="${allEvents}">
-    		<tr><td><a href="/events/${row.id}">${row.name}</a></td>
-    		<td>${row.eventDate}</td><td>${row.location}</td><td>${row.host.email}</td>
-    		<td>
-
-		<c:choose>
-		  <c:when test="${row.getHost().getId() == currentUser.id }">
-    		 	<a href="/events/${row.getId()}/edit">edit</a>  |  
-    		 	<a href="/events/${row.getId()}/delete">delete</a>
-		  </c:when>
-		  <c:when test="${row.users.contains( currentUser ) }">
-		    		Joined  
-		    		<a href="/events/${row.getId()}/cancel">Cancel</a>		  
-		    </c:when>
-		  <c:otherwise>
-	     	 <c:if test="${row.getHost().getId() != currentUser.id }">
-	    		 	<a href="/events/${row.getId()}/join">join</a>
-	    		 </c:if>
-		  </c:otherwise>
-		</c:choose>
-    		 
-    		 </td></tr>
+    		<c:if test="${row.getState() == currentUser.state}">
+	    		<!-- for OUR STATE -->
+	    		<tr><td><a href="/events/${row.id}">${row.name}</a></td>
+	    		<td>${row.eventDate}</td><td>${row.location}</td><td>${row.host.email}</td>
+	    		<td>
+				<c:choose>
+				  <c:when test="${row.getHost().getId() == currentUser.id }">
+		    		 	<a href="/events/${row.getId()}/edit">edit</a>  |  
+		    		 	<a href="/events/${row.getId()}/delete">delete</a>
+				  </c:when>
+				  <c:when test="${row.users.contains( currentUser ) }">
+				    		Joined  
+				    		<a href="/events/${row.getId()}/cancel">Cancel</a>		  
+				    </c:when>
+				  <c:otherwise>
+			     	 <c:if test="${row.getHost().getId() != currentUser.id }">
+			    		 	<a href="/events/${row.getId()}/join">join</a>
+			    		 </c:if>
+				  </c:otherwise>
+				</c:choose>
+	    		 </td></tr>
+    		 </c:if>
+    </c:forEach>
+    </table>
+    <!-- SHOW ALL EVENTS -->
+    
+    <!-- SHOW EVENTS IN Another STATEs -->
+       <h2>Here are events in another states: </h2>
+    <table style="width:100%">
+    <tr style="background:#ccc"><td>Name</td><td>Date</td><td>Location</td><td>Host</td><td>Action/ Status</td></tr>
+    <c:forEach var="row" items="${allEvents}">
+    		<c:if test="${row.getState() != currentUser.state}">
+	    		<!-- for OUR STATE -->
+	    		<tr><td><a href="/events/${row.id}">${row.name}</a></td>
+	    		<td>${row.eventDate}</td><td>${row.location}</td><td>${row.host.email}</td>
+	    		<td>
+				<c:choose>
+				  <c:when test="${row.getHost().getId() == currentUser.id }">
+		    		 	<a href="/events/${row.getId()}/edit">edit</a>  |  
+		    		 	<a href="/events/${row.getId()}/delete">delete</a>
+				  </c:when>
+				  <c:when test="${row.users.contains( currentUser ) }">
+				    		Joined  
+				    		<a href="/events/${row.getId()}/cancel">Cancel</a>		  
+				    </c:when>
+				  <c:otherwise>
+			     	 <c:if test="${row.getHost().getId() != currentUser.id }">
+			    		 	<a href="/events/${row.getId()}/join">join</a>
+			    		 </c:if>
+				  </c:otherwise>
+				</c:choose>
+	    		 </td></tr>
+    		 </c:if>
     </c:forEach>
     </table>
     <!-- SHOW ALL EVENTS -->
@@ -84,7 +115,6 @@
 			    <input type="date" name="myDate" />
 			</form:label>
 		    <span style="color:red"><form:errors path="eventDate"/></span>
-            
         </p>
     
         <p>
@@ -95,24 +125,7 @@
             		<c:forEach var="st" items="${states}">
             			<option value="${st}">${st}</option>
             		</c:forEach>
-	<!-- <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option>
-	<option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option>
-	<option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District Of Columbia</option>
-	<option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option>
-	<option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option>
-	<option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option>
-	<option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option>
-	<option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option>
-	<option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option>
-	<option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option>
-	<option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option>
-	<option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option>
-	<option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option>
-	<option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option>
-	<option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option>
-	<option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option>
-	<option value="WI">Wisconsin</option><option value="WY">Wyoming</option> -->
-            </form:select>
+			</form:select>
         </p>
         
 

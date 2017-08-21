@@ -10,4 +10,5 @@ public interface EventRepository extends CrudRepository<Event, Long>{
 	
 //    @Transactional
 //    void deleteById(Long Id);
+//	void update(Event event);
 }

@@ -27,7 +27,11 @@ public class EventService {
 	}
 	public void editEvent(Event event, Long id) {
 		Event edited_event = eventRepository.findOne(id);
-		edited_event = event;
+		edited_event.setName(event.getName());
+		edited_event.setEventDate(event.getEventDate());
+		edited_event.setLocation(event.getLocation());
+		edited_event.setState(event.getState());
+//		edited_event = event;
 		eventRepository.save(edited_event);
 	}
 	public Event findById(Long id){
