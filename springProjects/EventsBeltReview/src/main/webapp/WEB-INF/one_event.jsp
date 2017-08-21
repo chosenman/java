@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome Page</title>
 </head>
-<body style="width:80%; margin:0 auto">
+<body style="width:90%; margin:0 auto">
 
     <c:if test="${logoutMessage != null}">
     		<span style="color:green">
@@ -39,23 +39,32 @@
     
  <table style="width:100%"><tr><td valign="top" style="width:50%">
     <!-- EVENTS DETAILS -->
-    <p> <b>Host:</b> <span style="color:blue">${currentEvent.host.email}</span> </p>
-    <p> <b>Date:</b> ${currentEvent.eventDate} </p>
-    <p> <b>Location:</b> ${currentEvent.location}, ${currentEvent.state} </p>
-    <p> <b>People who are attending this event:</b> ${currentEvent.users.size()} </p>
+    <p class="desk"> <b>Host:</b> <span style="color:blue;">${currentEvent.host.email}</span> </p>
+    <p  class="desk"> <b>Date:</b> <span>${currentEvent.eventDate}</span> </p>
+    <p  class="desk"> <b>Location:</b> <span>${currentEvent.location}, ${currentEvent.state}</span> </p>
+    <p  class="desk"> <b>People who are attending this event:</b> <span>${currentEvent.users.size()}</span> </p>
     
-    - here goes table with users and their location -
+    <!-- here goes table with users and their location -->
+    <table style="width:90%">
+    <tr style="background:#ccc"><td>Name</td><td>Location</td></tr>
     <c:forEach var="user" items="${currentEvent.users}">
-    		<p>${user.email}</p>
+    <tr>
+    		<td>${user.email}</td>
+    		<td>${user.location}</td>
+    	</tr>
     </c:forEach>
+    </table>
     <!-- END EVENTS DETAILS -->
 
 
 </td><td valign="top">
-   <div style="border:1px solid black; width:100%;height:150px; overflow-y:scroll; padding:15px">
-    	<c:forEach var="row" items="${messages}">
-   		<p><b>${row.author.email}: </b>${row.message_text}</p>
-   	</c:forEach> 
+	<h2>Message Wall</h2>
+   <div style="border:1px solid black; width:100%;height:150px; overflow-y:scroll; padding:0px">
+    <div style="padding:15px">
+	    	<c:forEach var="row" items="${messages}">
+	   		<p><b>${row.author.email}: </b>${row.message_text}</p>
+	   	</c:forEach> 
+   	</div>
    </div>
 	<!-- ADD NEW Message  -->
 	<h2>Add Message</h2>
@@ -75,6 +84,10 @@
 	<!-- ADD NEW Message  -->
 
 </td></tr></table>
+<style>
+.desk { width:90%; border-bottom:1px dashed #ccc; }
+.desk span { float:right; }
+</style>
 
 </body>
 </html>

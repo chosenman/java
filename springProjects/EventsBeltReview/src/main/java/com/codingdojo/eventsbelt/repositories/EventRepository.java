@@ -7,5 +7,7 @@ import com.codingdojo.eventsbelt.models.Event;
 
 @Repository
 public interface EventRepository extends CrudRepository<Event, Long>{
-
+	
+//    @Transactional
+//    void deleteById(Long Id);
 }

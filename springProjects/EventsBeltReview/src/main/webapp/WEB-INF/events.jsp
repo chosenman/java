@@ -34,7 +34,7 @@
 	    </form>
 	<!-- LOGIN LOGOUT -->
 
-    <h1>Welcome, <c:out value="${currentUser.email}"></c:out></h1>
+    <h1>Welcome, <c:out value="${currentUser.email}"></c:out> (${currentUser.id})</h1>
     
     <p>
     Here are some of the events in your state:
@@ -47,20 +47,9 @@
     		<tr><td><a href="/events/${row.id}">${row.name}</a></td>
     		<td>${row.eventDate}</td><td>${row.location}</td><td>${row.host.email}</td>
     		<td>
-    		
-    		 <%-- <c:if test="${row.getId() == currentUser.getId() }">
-    		 	<a href="/events/${row.getId()}/edit">edit</a>  |  
-    		 	<a href="/events/${row.getId()}/delete">delete</a>
-    		 </c:if>
-     	 <c:if test="${row.getId() != currentUser.getId() }">
-    		 	<a href="/events/${row.getId()}/join">join</a>
-    		 </c:if>
-     	 <c:if test="${row.users.contains( currentUser ) }">
-    		 	Joined
-    		 </c:if> --%>
-    		 
+
 		<c:choose>
-		  <c:when test="${row.getId() == currentUser.getId() }">
+		  <c:when test="${row.getHost().getId() == currentUser.id }">
     		 	<a href="/events/${row.getId()}/edit">edit</a>  |  
     		 	<a href="/events/${row.getId()}/delete">delete</a>
 		  </c:when>
@@ -69,7 +58,7 @@
 		    		<a href="/events/${row.getId()}/cancel">Cancel</a>		  
 		    </c:when>
 		  <c:otherwise>
-	     	 <c:if test="${row.getId() != currentUser.getId() }">
+	     	 <c:if test="${row.getHost().getId() != currentUser.id }">
 	    		 	<a href="/events/${row.getId()}/join">join</a>
 	    		 </c:if>
 		  </c:otherwise>
@@ -103,7 +92,10 @@
             <form:input path="location"/>
             
             <form:select path="state" width="20px" placeholder="state">
-	<option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option>
+            		<c:forEach var="st" items="${states}">
+            			<option value="${st}">${st}</option>
+            		</c:forEach>
+	<!-- <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option>
 	<option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option>
 	<option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District Of Columbia</option>
 	<option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option>
@@ -119,7 +111,7 @@
 	<option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option>
 	<option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option>
 	<option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option>
-	<option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+	<option value="WI">Wisconsin</option><option value="WY">Wyoming</option> -->
             </form:select>
         </p>
         
