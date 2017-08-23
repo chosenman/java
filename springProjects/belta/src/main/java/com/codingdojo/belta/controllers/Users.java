@@ -1,4 +1,4 @@
-package com.codingdojo.eventsbelt.controllers;
+package com.codingdojo.belta.controllers;
 
 
 import java.security.Principal;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.codingdojo.eventsbelt.models.User;
-import com.codingdojo.eventsbelt.services.UserService;
-import com.codingdojo.eventsbelt.validator.UserValidator;
+import com.codingdojo.belta.models.User;
+import com.codingdojo.belta.services.UserService;
+import com.codingdojo.belta.validator.UserValidator;
 
 
 @Controller
@@ -53,10 +53,9 @@ public class Users {
     	
     		try { 
     			principal.getName();
-    			return "redirect:/events";
+    			return "redirect:/dashboard";
     		} catch (Exception e) {  }
     		
-    		model.addAttribute("states", states );
         return "loginreg.jsp";
     }
     
@@ -112,7 +111,25 @@ public class Users {
 	    
 	    
     
-   
+    
+    // dashboard
+	    @RequestMapping("/dashboard")
+	    public String dashboard(Principal principal, Model model) {
+	        // 1
+	    		try { 
+	    			String username = principal.getName();
+	    			User currentUser = userService.findByUsername(username);
+	    			Boolean isAdmin = userService.ifThisUserisAdmin(currentUser.getId());
+	    	        model.addAttribute("currentUser", currentUser );
+	    	        model.addAttribute("lastLogin", new Date());
+	    	        model.addAttribute("isAdmin", isAdmin );
+	    	        return "dashboard.jsp";
+	    		} catch (Exception e) {  }
+	    		
+	    		return "redirect:/";
+	        
+
+	    }
     
     
     
@@ -156,9 +173,6 @@ public class Users {
 		        }
 	        return "loginreg.jsp";
 	    }
-	    
-		String[] states = {"AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY" };
-		 
 	    
 }
 

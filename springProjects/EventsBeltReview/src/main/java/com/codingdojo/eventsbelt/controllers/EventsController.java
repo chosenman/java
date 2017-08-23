@@ -12,11 +12,13 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingdojo.eventsbelt.models.Comment;
 import com.codingdojo.eventsbelt.models.Event;
@@ -27,6 +29,7 @@ import com.codingdojo.eventsbelt.services.UserService;
 
 @Controller
 public class EventsController {
+	String errorMessage = null;
 
     private UserService userService;	
 	private EventService eventService;
@@ -43,9 +46,10 @@ public class EventsController {
     public String dashboard( 
     		Model model, Principal principal,
     		@Valid @ModelAttribute("event") Event event, BindingResult result,
-    		@Valid @ModelAttribute("message") Comment message
+    		@Valid @ModelAttribute("message") Comment message,
+    		@ModelAttribute("errors") String errors,
+    		@RequestParam(value="error", required=false) String error
     		) {
-
 		try { 
 			String username = principal.getName();
 			User currentUser = userService.findByUsername(username);
@@ -56,10 +60,12 @@ public class EventsController {
 	        List<Event> allEvents = eventService.findAll();
 	        model.addAttribute("allEvents", allEvents );
 	        model.addAttribute("states", states );
+	        model.addAttribute("errorMessage", errors);
+	        if(error != null) {
+	            model.addAttribute("errorMessage", "Invalid Data for new Event, Please try again.");
+	        }
 	        return "events.jsp";
 		} catch (Exception e) {  return "redirect:/"; }
-    	
-
     }
     
     
@@ -69,25 +75,40 @@ public class EventsController {
     			Model model, Principal principal,
 			@Valid @ModelAttribute("event") Event event,
 			BindingResult result,
-			@RequestParam(value="myDate", defaultValue="myDate") String myDate,
-			@Valid @ModelAttribute("message") Comment message
+			@RequestParam(value="myDate", defaultValue="DefVal") String myDate,
+			@Valid @ModelAttribute("message") Comment message,
+			RedirectAttributes redirectAttributes
     		) {
 		try { 
 	    		System.out.println(myDate);
-	    		event.setEventDate(dateFromString(myDate));
-	    		
-	   		String username = principal.getName();
-			User currentUser = userService.findByUsername(username);
-	    		event.setHost(currentUser);
-	    		
-	    		if(result.hasErrors()) {
-	    			System.out.println("we have errors doing event");
-	    			return "events.jsp";
+	    		if(myDate.equals("DefVal")) {
+	    			redirectAttributes.addFlashAttribute("errors", "date field, shouldn't be empty");
+	    			return "redirect:/events";
 	    		} else {
-	    	    		eventService.setNewEvent(event);
-	        		return "redirect:/events";	
+		    		event.setEventDate(dateFromString(myDate));
+		    		
+			   	String username = principal.getName();
+				User currentUser = userService.findByUsername(username);
+			    	event.setHost(currentUser);
+			    		
+			    	if(result.hasErrors()) {
+			    			String messageError = "";
+			    			for(ObjectError currentError : result.getAllErrors()) {
+			    				messageError += currentError.getDefaultMessage() + "\n";
+			    			}
+			    			System.out.println(messageError);
+			    			
+			    			redirectAttributes.addFlashAttribute("errors", messageError );
+//			    			return "redirect:/events?error";
+			    			return "redirect:/events";
+			    	} else {
+			    	    		eventService.setNewEvent(event);
+			        		return "redirect:/events";	
+			    	}
 	    		}
-		} catch (Exception e) {  return "redirect:/"; }
+		} catch (Exception e) {  
+			redirectAttributes.addFlashAttribute("errors", e);
+			return "redirect:/"; }
 
     }
     

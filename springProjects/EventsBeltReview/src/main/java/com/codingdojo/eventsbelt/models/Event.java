@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -26,6 +27,7 @@ public class Event {
     @Size(min=3, message="name must be greater than 3 characters")
     private String name;
     
+    @Future
     private Date eventDate;
     @Size(min=3, message="location must be greater than 3 characters")
     private String location;
